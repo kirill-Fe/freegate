@@ -1,0 +1,28 @@
+{
+  "name": "FreeGate — WireGuard VPN для Android",
+  "short_name": "FreeGate",
+  "description": "Бесплатный WireGuard-клиент для Android: одна кнопка, любая страна кроме России, таймер сессии и счётчик трафика.",
+  "lang": "ru",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#060a12",
+  "theme_color": "#060a12",
+  "categories": ["utilities", "security"],
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

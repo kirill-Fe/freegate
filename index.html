@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FreeGate — свой VPN на WireGuard для Android</title>
+  <meta name="description" content="FreeGate — бесплатный WireGuard-клиент для Android: кнопка вкл/выкл, выбор любой страны кроме России, таймер сессии и счётчик трафика. Скачать APK, инструкция и свой сервер за 5 минут. Версия для ПК — в разработке.">
+  <meta name="theme-color" content="#060a12">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="FreeGate — свой VPN в одно нажатие">
+  <meta property="og:description" content="WireGuard-клиент для Android: одна кнопка, любая страна кроме России, таймер сессии. Бесплатно, без рекламы и логов.">
+  <meta property="og:image" content="screenshot.png">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/main.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Перейти к содержимому</a>
+
+<header class="header" id="top">
+  <div class="container header__inner">
+    <a class="logo" href="#top" aria-label="FreeGate — на главную">
+      <span class="logo__mark">FG</span>
+      <span class="logo__text">FreeGate<small>WireGuard VPN</small></span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Основная навигация">
+      <a href="#features">Возможности</a>
+      <a href="#screens">Скриншоты</a>
+      <a href="#download">Скачать</a>
+      <a href="#guide">Инструкция</a>
+      <a href="#status" class="nav__pc">ПК <span class="badge badge--warn">в разработке</span></a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <a class="btn btn--primary btn--sm header__cta" href="download/freegate-1.0.0.apk" download>Скачать APK</a>
+    <button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============================================================ HERO -->
+  <section class="hero">
+    <div class="hero__glow" aria-hidden="true"></div>
+    <div class="container hero__grid">
+      <div class="hero__copy">
+        <span class="eyebrow"><span class="dot"></span> Открытый клиент WireGuard · Android</span>
+        <h1>Свой VPN<br><span class="grad">в одно нажатие</span></h1>
+        <p class="lead">
+          Кнопка вкл/выкл, любая страна кроме России и таймер сессии внизу экрана.
+          Настоящий WireGuard-туннель — без аккаунтов, рекламы и логов.
+        </p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="download/freegate-1.0.0.apk" download>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0 4.5-4.5M12 15l-4.5-4.5M4 20h16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Скачать для Android
+          </a>
+          <a class="btn btn--ghost" href="#guide">Инструкция</a>
+        </div>
+        <ul class="chips">
+          <li>Android 7+</li>
+          <li>19,2 МБ</li>
+          <li>Бесплатно</li>
+          <li>Без рекламы</li>
+          <li>RU исключена</li>
+        </ul>
+      </div>
+
+      <!-- Интерактивное демо: работает на чистом JS -->
+      <div class="hero__demo">
+        <div class="demo" id="demo">
+          <div class="demo__bar">
+            <span class="demo__mark">FG</span>
+            <span class="demo__name">FreeGate</span>
+            <span class="demo__tag">демо</span>
+          </div>
+
+          <div class="demo__pill" data-pill>НЕ ПОДКЛЮЧЕНО</div>
+
+          <div class="demo__server">
+            <svg class="demo__flag" viewBox="0 0 24 16" aria-hidden="true" focusable="false">
+              <rect width="24" height="16" fill="#1a1a1a"/>
+              <rect y="5.33" width="24" height="5.34" fill="#dd0000"/>
+              <rect y="10.67" width="24" height="5.33" fill="#ffce00"/>
+            </svg>
+            <span class="demo__server-text">
+              <b>Франкфурт · демо</b>
+              <i>127.0.0.1:51821</i>
+            </span>
+            <svg class="demo__chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+
+          <button class="power" id="powerBtn" type="button" aria-pressed="false" aria-label="Включить VPN в демо">
+            <span class="power__ring"></span>
+            <span class="power__ring"></span>
+            <span class="power__inner">
+              <svg class="power__icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 3v8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+                <path d="M6.3 6.6a8 8 0 1 0 11.4 0" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+              </svg>
+              <span class="power__label" data-label>ВКЛЮЧИТЬ</span>
+            </span>
+          </button>
+
+          <div class="demo__traffic">
+            <span>↓ <b data-rx>0 Б</b></span>
+            <span>↑ <b data-tx>0 Б</b></span>
+          </div>
+
+          <div class="demo__timer">
+            <div class="demo__timer-head">
+              <span>ВРЕМЯ СЕССИИ</span>
+              <span class="demo__timer-state" data-timer-state>пауза</span>
+            </div>
+            <div class="demo__clock" data-clock>00:00:00</div>
+            <div class="demo__hint" data-hint>Таймер запустится после подключения</div>
+          </div>
+        </div>
+        <p class="demo__caption">Это демо интерфейса — нажмите кнопку. В приложении всё так же, но с настоящим туннелем.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== FEATURES -->
+  <section class="section" id="features">
+    <div class="container">
+      <div class="section__head reveal">
+        <span class="kicker">Возможности</span>
+        <h2>Всё, что нужно от VPN — и ничего лишнего</h2>
+        <p class="section__sub">Никаких подписок, аккаунтов и «премиум-стран». Только туннель, выбор страны и понятный статус.</p>
+      </div>
+
+      <div class="cards">
+        <article class="card reveal">
+          <span class="card__icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M6.5 6.8a7.5 7.5 0 1 0 11 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </span>
+          <h3>Одно нажатие</h3>
+          <p>Кнопка вкл/выкл поднимает и опускает WireGuard-туннель. Никаких экранов с галочками и десятков настроек.</p>
+        </article>
+
+        <article class="card reveal">
+          <span class="card__icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 7.5V12l3 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </span>
+          <h3>Таймер сессии</h3>
+          <p>Внизу экрана тикает <code>ЧЧ:ММ:СС</code>. Метка старта хранится локально, поэтому таймер не сбрасывается при сворачивании.</p>
+        </article>
+
+        <article class="card reveal">
+          <span class="card__icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3.5 12h17M12 3.5c2.5 2.4 3.8 5.3 3.8 8.5S14.5 18.1 12 20.5C9.5 18.1 8.2 15.2 8.2 12S9.5 5.9 12 3.5z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          </span>
+          <h3>80 стран, РФ исключена</h3>
+          <p>Каталог с флагами и поиском. России нет в списке, а сервер с кодом <code>RU</code> отбрасывается даже при загрузке с сервера.</p>
+        </article>
+
+        <article class="card reveal">
+          <span class="card__icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M4 20h16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <h3>Любые конфиги</h3>
+          <p>Импорт <code>.conf</code> файлом, вставкой текста или ссылкой на список <code>servers.json</code>. Подходит любой WireGuard-сервер.</p>
+        </article>
+
+        <article class="card reveal">
+          <span class="card__icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16l4-5 3.5 3L16 8l4 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 20h16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </span>
+          <h3>Трафик в реальном времени</h3>
+          <p>Счётчики ↓/↑ берутся напрямую из статистики WireGuard, а не рисуются «для красоты».</p>
+        </article>
+
+        <article class="card reveal">
+          <span class="card__icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5.5c0 4.6-3 8.2-7 9.5-4-1.3-7-4.9-7-9.5V6l7-3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 12.2l2.1 2.1L15.5 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <h3>Без логов и аккаунтов</h3>
+          <p>Ключи и конфиги лежат только на устройстве. Нет регистрации, аналитики, рекламных SDK и «облачной синхронизации».</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================= SCREENS -->
+  <section class="section section--alt" id="screens">
+    <div class="container">
+      <div class="section__head reveal">
+        <span class="kicker">Скриншоты</span>
+        <h2>Как это выглядит</h2>
+        <p class="section__sub">Реальные снимки с эмулятора Android 16 — не рендеры.</p>
+      </div>
+
+      <div class="shots">
+        <figure class="shot reveal">
+          <button class="shot__btn" type="button" data-full="screenshot.png" aria-label="Открыть скриншот: подключено">
+            <img src="screenshot.png" alt="Главный экран FreeGate в состоянии «Защищено», таймер 00:00:26" width="1080" height="2400" loading="lazy" decoding="async">
+          </button>
+          <figcaption>Подключено: зелёная кнопка и таймер</figcaption>
+        </figure>
+
+        <figure class="shot reveal">
+          <button class="shot__btn" type="button" data-full="countries.png" aria-label="Открыть скриншот: выбор страны">
+            <img src="countries.png" alt="Шторка выбора сервера: мои серверы и список стран" width="1080" height="2400" loading="lazy" decoding="async">
+          </button>
+          <figcaption>Выбор страны с флагами и поиском</figcaption>
+        </figure>
+
+        <figure class="shot reveal">
+          <button class="shot__btn" type="button" data-full="import.png" aria-label="Открыть скриншот: импорт конфига">
+            <img src="import.png" alt="Экран добавления WireGuard-конфига" width="1080" height="2400" loading="lazy" decoding="async">
+          </button>
+          <figcaption>Импорт <code>.conf</code>: файл или текст</figcaption>
+        </figure>
+
+        <figure class="shot reveal">
+          <button class="shot__btn" type="button" data-full="settings.png" aria-label="Открыть скриншот: настройки">
+            <img src="settings.png" alt="Настройки: ссылка на список серверов и список установленных конфигов" width="1080" height="2400" loading="lazy" decoding="async">
+          </button>
+          <figcaption>Настройки и синхронизация по ссылке</figcaption>
+        </figure>
+
+        <figure class="shot reveal">
+          <button class="shot__btn" type="button" data-full="home.png" aria-label="Открыть скриншот: главный экран">
+            <img src="home.png" alt="Пустой главный экран FreeGate с приглашением добавить конфиг" width="1080" height="2400" loading="lazy" decoding="async">
+          </button>
+          <figcaption>Первый запуск: добавьте конфиг</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ PC -->
+  <section class="section" id="status">
+    <div class="container">
+      <div class="pc reveal">
+        <div class="pc__copy">
+          <span class="badge badge--warn badge--lg">В разработке</span>
+          <h2>VPN для ПК</h2>
+          <p>
+            Windows-клиент сейчас в разработке: нужен аккуратный менеджер туннелей
+            и работа с системными правами. Сборок пока нет — как только появится
+            стабильная версия, она будет здесь, на этой же странице.
+          </p>
+          <p class="muted">
+            Пока на компьютере можно поднять сервер и импортировать конфиг в
+            официальный WireGuard для Windows / Linux / macOS.
+          </p>
+          <div class="pc__actions">
+            <button class="btn btn--ghost" type="button" disabled>Windows — скоро</button>
+            <a class="btn btn--ghost" href="#download">Android уже доступен</a>
+          </div>
+        </div>
+
+        <div class="pc__roadmap">
+          <div class="road">
+            <div class="road__top"><b>Android</b><span class="badge badge--ok">Готово · 1.0.0</span></div>
+            <div class="progress"><span style="--v:100%"></span></div>
+            <p class="road__note">Туннель, таймер, выбор стран, импорт и синхронизация.</p>
+          </div>
+
+          <div class="road">
+            <div class="road__top"><b>Windows</b><span class="badge badge--warn">В разработке · ~50%</span></div>
+            <div class="progress"><span style="--v:50%"></span></div>
+            <p class="road__note">Прототип: управление туннелем через WireGuard for Windows, права администратора.</p>
+          </div>
+
+          <div class="road">
+            <div class="road__top"><b>Linux</b><span class="badge">План · ~15%</span></div>
+            <div class="progress"><span style="--v:15%"></span></div>
+            <p class="road__note">Обёртка над <code>wg-quick</code>, тот же интерфейс и таймер.</p>
+          </div>
+
+          <div class="road">
+            <div class="road__top"><b>macOS</b><span class="badge">План</span></div>
+            <div class="progress"><span style="--v:5%"></span></div>
+            <p class="road__note">Нужен Apple Developer и entitlement <code>NetworkExtension</code>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== DOWNLOAD -->
+  <section class="section section--alt" id="download">
+    <div class="container">
+      <div class="section__head reveal">
+        <span class="kicker">Скачать</span>
+        <h2>FreeGate 1.0.0 для Android</h2>
+        <p class="section__sub">APK-файл без Play Store: ставится напрямую, весит 19,2 МБ.</p>
+      </div>
+
+      <div class="download">
+        <div class="download__card reveal">
+          <div class="download__head">
+            <span class="download__icon">
+              <svg viewBox="0 0 108 108" aria-hidden="true">
+                <path d="M54 16 84 27v28c0 19-13 32-30 39-17-7-30-20-30-39V27z" fill="none" stroke="#4ade80" stroke-width="7" stroke-linejoin="round"/>
+                <path d="M51 40h6v10h10v6H57v10h-6V56H41v-6h10z" fill="#4ade80"/>
+              </svg>
+            </span>
+            <div>
+              <h3>FreeGate <span class="muted">1.0.0</span></h3>
+              <p class="muted">Android 7.0+ (API 24) · arm64 / x86_64 · WireGuard</p>
+            </div>
+          </div>
+
+          <dl class="meta">
+            <div><dt>Размер</dt><dd>19,2 МБ</dd></div>
+            <div><dt>Дата сборки</dt><dd>14.11.2026</dd></div>
+            <div><dt>Протокол</dt><dd>WireGuard</dd></div>
+            <div><dt>Цена</dt><dd>0 ₽</dd></div>
+          </dl>
+
+          <div class="hash">
+            <span>SHA-256</span>
+            <code id="sha256">2eb17923ffebecacef1a17ab05d6e4ac99727edac79a7ae7ea9e01e63df77730</code>
+            <button class="copy copy--mini" type="button" data-copy-target="sha256" aria-label="Скопировать SHA-256">Копировать</button>
+          </div>
+
+          <div class="download__actions">
+            <a class="btn btn--primary btn--wide" href="download/freegate-1.0.0.apk" download>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0 4.5-4.5M12 15l-4.5-4.5M4 20h16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Скачать APK
+            </a>
+            <a class="btn btn--ghost" href="#guide">Как установить</a>
+          </div>
+
+          <p class="note note--warn">
+            APK не из Google Play. Android спросит разрешение «Устанавливать неизвестные приложения» —
+            это нормально для сборки с сайта. Сверьте SHA-256 после скачивания.
+          </p>
+          <p class="note" data-os-hint hidden></p>
+        </div>
+
+        <ol class="steps reveal">
+          <li class="step">
+            <span class="step__num">1</span>
+            <div><b>Скачайте файл</b><p><code>freegate-1.0.0.apk</code> сохранится в «Загрузки».</p></div>
+          </li>
+          <li class="step">
+            <span class="step__num">2</span>
+            <div><b>Разрешите установку</b><p>Откройте файл → «Настройки» → разрешите установку из этого источника.</p></div>
+          </li>
+          <li class="step">
+            <span class="step__num">3</span>
+            <div><b>Добавьте сервер</b><p>Импортируйте <code>.conf</code> или укажите ссылку на список. Без сервера подключаться некуда.</p></div>
+          </li>
+          <li class="step">
+            <span class="step__num">4</span>
+            <div><b>Нажмите кнопку</b><p>Разрешите Android создать VPN-подключение — таймер пойдёт вниз экрана.</p></div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================== GUIDE -->
+  <section class="section" id="guide">
+    <div class="container">
+      <div class="section__head reveal">
+        <span class="kicker">Инструкция</span>
+        <h2>Сервер за 5 минут</h2>
+        <p class="section__sub">
+          Приложение не продаёт трафик и не содержит «бесплатных стран» — это физически невозможно
+          без чьих-то серверов. Зато свой сервер поднимается одним скриптом.
+        </p>
+      </div>
+
+      <div class="guide">
+        <article class="gstep reveal">
+          <div class="gstep__num">01</div>
+          <div class="gstep__body">
+            <h3>Возьмите сервер в нужной стране</h3>
+            <p>
+              Подойдёт любой VPS (от ~1–3 $/мес) или бесплатный тариф. Например,
+              <b>Oracle Cloud Always Free</b> — бессрочный бесплатный инстанс, регионы есть в Европе,
+              Азии и Америке.
+            </p>
+            <ul class="ticks">
+              <li>Ubuntu 22.04 / 24.04 или Debian 12</li>
+              <li>root-доступ по SSH</li>
+              <li>открытый UDP-порт (по умолчанию 51820)</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="gstep reveal">
+          <div class="gstep__num">02</div>
+          <div class="gstep__body">
+            <h3>Запустите скрипт установки</h3>
+            <p>Скрипт поставит WireGuard, включит NAT и сгенерирует конфиги для приложения.</p>
+            <div class="code">
+              <div class="code__head"><span>bash · на сервере</span><button class="copy" type="button">Копировать</button></div>
+              <pre><code>sudo COUNT=5 COUNTRY=NL CITY=Amsterdam bash setup-wireguard.sh</code></pre>
+            </div>
+            <p class="muted">
+              <code>COUNT</code> — сколько конфигов создать, <code>COUNTRY</code> — ISO-код страны
+              (Россия запрещена), <code>CITY</code> — подпись в приложении.
+            </p>
+          </div>
+        </article>
+
+        <article class="gstep reveal">
+          <div class="gstep__num">03</div>
+          <div class="gstep__body">
+            <h3>Заберите конфиги</h3>
+            <p>В папке появятся клиентские конфиги и готовый список для приложения:</p>
+            <div class="code">
+              <div class="code__head"><span>результат</span><button class="copy" type="button">Копировать</button></div>
+              <pre><code>freegate-servers/client-1.conf … client-5.conf
+freegate-servers/servers.json</code></pre>
+            </div>
+          </div>
+        </article>
+
+        <article class="gstep reveal">
+          <div class="gstep__num">04</div>
+          <div class="gstep__body">
+            <h3>Импортируйте в приложение</h3>
+            <p>Два равнозначных способа:</p>
+            <div class="ways">
+              <div class="way">
+                <b>Файлом</b>
+                <p>«+ Добавить WireGuard-конфиг» → «Файл .conf» → выберите <code>client-1.conf</code>.</p>
+              </div>
+              <div class="way">
+                <b>Ссылкой</b>
+                <p>Настройки → URL списка → «Обновить». Все серверы появятся в выборе страны.</p>
+              </div>
+            </div>
+            <div class="code">
+              <div class="code__head"><span>отдать список по HTTP</span><button class="copy" type="button">Копировать</button></div>
+              <pre><code>cd freegate-servers &amp;&amp; python3 -m http.server 8080</code></pre>
+            </div>
+            <p class="note">
+              Файл <code>servers.json</code> содержит приватные ключи. Для публичного хостинга
+              используйте HTTPS и токен в URL, иначе сервером сможет пользоваться кто угодно.
+            </p>
+          </div>
+        </article>
+      </div>
+
+      <div class="json reveal">
+        <div class="json__text">
+          <h3>Формат <code>servers.json</code></h3>
+          <p>Любой статический хостинг подойдёт: GitHub Pages, Gist (raw), свой nginx. Поле <code>country</code> — ISO-код, <code>RU</code> игнорируется.</p>
+        </div>
+        <div class="code">
+          <div class="code__head"><span>json</span><button class="copy" type="button">Копировать</button></div>
+          <pre><code>{
+  "servers": [
+    {
+      "id": "nl-amsterdam-1",
+      "name": "Амстердам · 1",
+      "country": "NL",
+      "config": "[Interface]\nPrivateKey = ...\nAddress = 10.66.66.2/32\nDNS = 1.1.1.1\n\n[Peer]\nPublicKey = ...\nEndpoint = 203.0.113.10:51820\nAllowedIPs = 0.0.0.0/0, ::/0\n"
+    }
+  ]
+}</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ TECH -->
+  <section class="section section--alt" id="tech">
+    <div class="container">
+      <div class="section__head reveal">
+        <span class="kicker">Под капотом</span>
+        <h2>Что внутри</h2>
+        <p class="section__sub">Приложение — тонкая обёртка над официальным WireGuard, без самодельной криптографии.</p>
+      </div>
+
+      <div class="tech">
+        <div class="tech__item reveal"><b>WireGuard</b><span>Официальная библиотека <code>com.wireguard.android:tunnel</code>, GoBackend и реальный <code>VpnService</code>.</span></div>
+        <div class="tech__item reveal"><b>Kotlin + Compose</b><span>Material 3, тёмная тема, собственные векторные иконки на Canvas — без лишних зависимостей.</span></div>
+        <div class="tech__item reveal"><b>Таймер на метке старта</b><span><code>connected_at</code> в SharedPreferences + сверка состояния туннеля при возврате в приложение.</span></div>
+        <div class="tech__item reveal"><b>Локальные данные</b><span>Конфиги и ключи только в приватном хранилище приложения. Никаких сетевых запросов, кроме вашего списка серверов.</span></div>
+        <div class="tech__item reveal"><b>Минимум разрешений</b><span>Интернет, состояние сети, foreground service и уведомление о работе VPN.</span></div>
+        <div class="tech__item reveal"><b>Открытая сборка</b><span><code>./gradlew assembleDebug</code> — APK можно собрать самому и сравнить SHA-256.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= FAQ -->
+  <section class="section" id="faq">
+    <div class="container container--narrow">
+      <div class="section__head reveal">
+        <span class="kicker">FAQ</span>
+        <h2>Частые вопросы</h2>
+      </div>
+
+      <div class="faq">
+        <details class="reveal">
+          <summary>Приложение действительно бесплатное?</summary>
+          <p>Да. Нет подписки, рекламы, аккаунта и «пробного периода». Платить нужно только за сервер, если вы не используете бесплатный тариф — зато этот сервер ваш.</p>
+        </details>
+
+        <details class="reveal">
+          <summary>Почему внутри нет бесплатных серверов всех стран?</summary>
+          <p>Сервер — это железо, канал и электричество. «Бесплатные VPN всех стран» живут за счёт продажи трафика, рекламы или кражи чужих мощностей. Здесь вместо этого скрипт, который поднимает ваш собственный сервер за пару минут.</p>
+        </details>
+
+        <details class="reveal">
+          <summary>Почему России нет в списке?</summary>
+          <p>Это требование проекта: РФ не предлагается как точка выхода. Код <code>RU</code> заблокирован в каталоге и отфильтровывается при загрузке списка с сервера.</p>
+        </details>
+
+        <details class="reveal">
+          <summary>Когда будет версия для ПК?</summary>
+          <p>Windows-клиент в разработке, прогресс — в разделе <a href="#status">«VPN для ПК»</a>. Пока на компьютере используйте официальный WireGuard с конфигом из шага 3 инструкции — протокол тот же.</p>
+        </details>
+
+        <details class="reveal">
+          <summary>Есть ли kill switch?</summary>
+          <p>Встроенного нет: при обрыве туннеля трафик пойдёт напрямую. В Android можно включить системный «Always-on VPN» для FreeGate — система сама поднимет туннель.</p>
+        </details>
+
+        <details class="reveal">
+          <summary>Собираете ли вы данные?</summary>
+          <p>Нет. В приложении нет аналитики и сетевых вызовов, кроме загрузки вашего <code>servers.json</code>. Конфиги и ключи не покидают устройство.</p>
+        </details>
+
+        <details class="reveal">
+          <summary>Будет ли версия для iOS?</summary>
+          <p>Технически можно, но для <code>NetworkExtension</code> нужен платный Apple Developer аккаунт. Пока в планах после Windows и Linux.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ CTA -->
+  <section class="cta">
+    <div class="container cta__inner reveal">
+      <div>
+        <h2>Готовы попробовать?</h2>
+        <p>Скачайте APK, добавьте свой сервер и нажмите большую кнопку.</p>
+      </div>
+      <a class="btn btn--primary btn--lg" href="download/freegate-1.0.0.apk" download>Скачать FreeGate 1.0.0</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container footer__grid">
+    <div>
+      <a class="logo logo--footer" href="#top">
+        <span class="logo__mark">FG</span>
+        <span class="logo__text">FreeGate<small>WireGuard VPN · Android</small></span>
+      </a>
+      <p class="muted footer__note">
+        Открытый клиент WireGuard. Не предоставляет серверы и не собирает данные.
+        Используйте VPN в соответствии с законодательством вашей страны.
+      </p>
+    </div>
+    <nav class="footer__nav" aria-label="Ссылки в подвале">
+      <a href="#features">Возможности</a>
+      <a href="#screens">Скриншоты</a>
+      <a href="#download">Скачать</a>
+      <a href="#guide">Инструкция</a>
+      <a href="#status">VPN для ПК</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </div>
+  <div class="container footer__bottom">
+    <span>© <span id="year">2026</span> FreeGate</span>
+    <span class="muted">Сделано на WireGuard · без рекламы и трекеров</span>
+  </div>
+</footer>
+
+<dialog class="lightbox" id="lightbox" aria-label="Просмотр скриншота">
+  <button class="lightbox__close" type="button" aria-label="Закрыть">✕</button>
+  <img id="lightboxImg" src="" alt="">
+</dialog>
+
+</body>
+</html>

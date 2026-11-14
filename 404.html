@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>404 — страница не найдена · FreeGate</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#060a12">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container header__inner">
+      <a class="logo" href="index.html">
+        <span class="logo__mark">FG</span>
+        <span class="logo__text">FreeGate<small>WireGuard VPN</small></span>
+      </a>
+    </div>
+  </header>
+
+  <main class="section" id="main">
+    <div class="container container--narrow" style="text-align:center">
+      <span class="kicker">Ошибка 404</span>
+      <h1>Такой страницы нет</h1>
+      <p class="lead" style="margin:0 auto 26px">
+        Возможно, ссылка устарела или в адресе опечатка.
+        Всё самое нужное — на главной: скачать APK, инструкция и статус версии для ПК.
+      </p>
+      <div class="hero__actions" style="justify-content:center">
+        <a class="btn btn--primary" href="index.html">На главную</a>
+        <a class="btn btn--ghost" href="index.html#download">Скачать APK</a>
+        <a class="btn btn--ghost" href="index.html#guide">Инструкция</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__bottom">
+      <span>© <span id="year">2026</span> FreeGate</span>
+      <span class="muted">Сделано на WireGuard · без рекламы и трекеров</span>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

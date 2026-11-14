@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>device test</title>
+<style>
+  html, body { margin: 0; background: #000; }
+  iframe { display: block; border: 0; }
+</style>
+</head>
+<body>
+<iframe id="f" title="test"></iframe>
+<script>
+  var params = new URLSearchParams(location.search);
+  var width = parseInt(params.get('w') || '390', 10);
+  var height = parseInt(params.get('h') || '844', 10);
+  var target = params.get('to') || '';
+  var frame = document.getElementById('f');
+  frame.style.width = width + 'px';
+  frame.style.height = height + 'px';
+  frame.src = '/';
+  frame.addEventListener('load', function () {
+    var w = frame.contentWindow, d = frame.contentDocument;
+    try {
+      w.history.scrollRestoration = 'manual';
+      d.documentElement.style.scrollBehavior = 'auto';
+      d.querySelectorAll('.reveal').forEach(function (el) {
+        el.classList.add('is-visible');
+      });
+      if (!target) return;
+      var el = d.getElementById(target);
+      if (!el) return;
+      if (target === 'shots') {
+        w.scrollTo(0, d.getElementById('screens').offsetTop - 10);
+      } else {
+        w.scrollTo(0, el.offsetTop + (parseInt(params.get('off') || '0', 10)));
+      }
+    } catch (e) {}
+  });
+</script>
+</body>
+</html>
