@@ -21,7 +21,7 @@
 <header class="header" id="top">
   <div class="container header__inner">
     <a class="logo" href="#top" aria-label="FreeGate — на главную">
-      <span class="logo__mark">FG</span>
+      <img class="logo__mark" src="favicon.svg" alt="" width="38" height="38" decoding="async">
       <span class="logo__text">FreeGate<small>WireGuard VPN</small></span>
     </a>
 
@@ -74,7 +74,7 @@
       <div class="hero__demo">
         <div class="demo" id="demo">
           <div class="demo__bar">
-            <span class="demo__mark">FG</span>
+            <img class="demo__mark" src="favicon.svg" alt="" width="26" height="26" decoding="async">
             <span class="demo__name">FreeGate</span>
             <span class="demo__tag">демо</span>
           </div>
@@ -198,7 +198,7 @@
       <div class="shots">
         <figure class="shot reveal">
           <button class="shot__btn" type="button" data-full="screenshot.png" aria-label="Открыть скриншот: подключено">
-            <img src="screenshot.png" alt="Главный экран FreeGate в состоянии «Защищено», таймер 00:00:26" width="1080" height="2400" loading="lazy" decoding="async">
+            <img src="screenshot.png" alt="Главный экран FreeGate в состоянии «Защищено», таймер 00:00:58" width="1080" height="2400" loading="lazy" decoding="async">
           </button>
           <figcaption>Подключено: зелёная кнопка и таймер</figcaption>
         </figure>
@@ -226,7 +226,7 @@
 
         <figure class="shot reveal">
           <button class="shot__btn" type="button" data-full="home.png" aria-label="Открыть скриншот: главный экран">
-            <img src="home.png" alt="Пустой главный экран FreeGate с приглашением добавить конфиг" width="1080" height="2400" loading="lazy" decoding="async">
+            <img src="home.png" alt="Главный экран FreeGate: сервер выбран, туннель выключен" width="1080" height="2400" loading="lazy" decoding="async">
           </button>
           <figcaption>Первый запуск: добавьте конфиг</figcaption>
         </figure>
@@ -297,12 +297,7 @@
       <div class="download">
         <div class="download__card reveal">
           <div class="download__head">
-            <span class="download__icon">
-              <svg viewBox="0 0 108 108" aria-hidden="true">
-                <path d="M54 16 84 27v28c0 19-13 32-30 39-17-7-30-20-30-39V27z" fill="none" stroke="#4ade80" stroke-width="7" stroke-linejoin="round"/>
-                <path d="M51 40h6v10h10v6H57v10h-6V56H41v-6h10z" fill="#4ade80"/>
-              </svg>
-            </span>
+            <img class="download__logo" src="favicon.svg" alt="" width="62" height="62" decoding="async">
             <div>
               <h3>FreeGate <span class="muted">1.0.0</span></h3>
               <p class="muted">Android 7.0+ (API 24) · arm64 / x86_64 · WireGuard</p>
@@ -311,14 +306,14 @@
 
           <dl class="meta">
             <div><dt>Размер</dt><dd>19,2 МБ</dd></div>
-            <div><dt>Дата сборки</dt><dd>14.11.2026</dd></div>
+            <div><dt>Дата сборки</dt><dd>15.11.2026</dd></div>
             <div><dt>Протокол</dt><dd>WireGuard</dd></div>
             <div><dt>Цена</dt><dd>0 ₽</dd></div>
           </dl>
 
           <div class="hash">
             <span>SHA-256</span>
-            <code id="sha256">2eb17923ffebecacef1a17ab05d6e4ac99727edac79a7ae7ea9e01e63df77730</code>
+            <code id="sha256">84a9b05ada64454a19e6ae0e286563db979f7effbee82734955f7f45f6fc6428</code>
             <button class="copy copy--mini" type="button" data-copy-target="sha256" aria-label="Скопировать SHA-256">Копировать</button>
           </div>
 
@@ -396,7 +391,7 @@
             <p>Скрипт поставит WireGuard, включит NAT и сгенерирует конфиги для приложения.</p>
             <div class="code">
               <div class="code__head"><span>bash · на сервере</span><button class="copy" type="button">Копировать</button></div>
-              <pre><code>sudo COUNT=5 COUNTRY=NL CITY=Amsterdam bash setup-wireguard.sh</code></pre>
+              <pre><code>sudo env COUNT=5 COUNTRY=NL CITY=Amsterdam bash setup-wireguard.sh</code></pre>
             </div>
             <p class="muted">
               <code>COUNT</code> — сколько конфигов создать, <code>COUNTRY</code> — ISO-код страны
@@ -443,6 +438,75 @@ freegate-servers/servers.json</code></pre>
             </p>
           </div>
         </article>
+      </div>
+
+      <!-- Бесплатные направления: три готовых пресета для своего сервера -->
+      <div class="free-cities reveal" id="free">
+        <div class="free-cities__head">
+          <span class="badge badge--ok badge--lg">Бесплатно</span>
+          <h3>Амстердам, Лос-Анджелес, Сингапур</h3>
+          <p>
+            Три направления, которые реально поднять без платежей: на бесплатном тарифе облака
+            или на домашнем мини-ПК. Один сервер = один город, конфиги генерирует тот же скрипт.
+          </p>
+        </div>
+
+        <div class="free-cities__grid">
+          <article class="fcity">
+            <div class="fcity__top">
+              <svg class="fcity__flag" viewBox="0 0 24 16" aria-hidden="true">
+                <rect width="24" height="16" fill="#ffffff"/>
+                <rect width="24" height="5.33" fill="#ae1c28"/>
+                <rect y="10.67" width="24" height="5.33" fill="#21468b"/>
+              </svg>
+              <b>Амстердам</b>
+              <span class="badge">NL</span>
+            </div>
+            <code class="fcity__cmd">sudo env COUNT=10 COUNTRY=NL CITY=Amsterdam bash setup-wireguard.sh</code>
+            <p>Oracle Always Free · регион <code>eu-amsterdam-1</code> или любой VPS.</p>
+          </article>
+
+          <article class="fcity">
+            <div class="fcity__top">
+              <svg class="fcity__flag" viewBox="0 0 24 16" aria-hidden="true">
+                <rect width="24" height="16" fill="#ffffff"/>
+                <rect width="24" height="1.23" fill="#b22234"/>
+                <rect y="2.46" width="24" height="1.23" fill="#b22234"/>
+                <rect y="4.92" width="24" height="1.23" fill="#b22234"/>
+                <rect y="7.38" width="24" height="1.23" fill="#b22234"/>
+                <rect y="9.85" width="24" height="1.23" fill="#b22234"/>
+                <rect y="12.31" width="24" height="1.23" fill="#b22234"/>
+                <rect y="14.77" width="24" height="1.23" fill="#b22234"/>
+                <rect width="10" height="8.6" fill="#3c3b6e"/>
+              </svg>
+              <b>Лос-Анджелес</b>
+              <span class="badge">US</span>
+            </div>
+            <code class="fcity__cmd">sudo env COUNT=10 COUNTRY=US CITY="Los Angeles" bash setup-wireguard.sh</code>
+            <p>Ближайший бесплатный регион — Калифорния (<code>us-west-1</code>, AWS Free Tier).</p>
+          </article>
+
+          <article class="fcity">
+            <div class="fcity__top">
+              <svg class="fcity__flag" viewBox="0 0 24 16" aria-hidden="true">
+                <rect width="24" height="8" fill="#ed2939"/>
+                <rect y="8" width="24" height="8" fill="#ffffff"/>
+                <circle cx="8" cy="8" r="3.4" fill="#ffffff"/>
+                <circle cx="8" cy="8" r="2.8" fill="#ed2939"/>
+              </svg>
+              <b>Сингапур</b>
+              <span class="badge">SG</span>
+            </div>
+            <code class="fcity__cmd">sudo env COUNT=10 COUNTRY=SG CITY=Singapore bash setup-wireguard.sh</code>
+            <p>Oracle Always Free · регион <code>ap-singapore-1</code>.</p>
+          </article>
+        </div>
+
+        <p class="free-cities__note">
+          Готовых публичных конфигов этих городов в APK нет и быть не может: бесплатный сервер —
+          это чья-то машина и канал. Зато на бесплатном тарифе вы получаете свою точку,
+          которая не логирует трафик и не делится с третьими лицами.
+        </p>
       </div>
 
       <div class="json reveal">
@@ -508,7 +572,7 @@ freegate-servers/servers.json</code></pre>
 
         <details class="reveal">
           <summary>Почему России нет в списке?</summary>
-          <p>Это требование проекта: РФ не предлагается как точка выхода. Код <code>RU</code> заблокирован в каталоге и отфильтровывается при загрузке списка с сервера.</p>
+          <p>Приложение сделано в России, и точка выхода в России не имеет смысла: если вы и так находитесь в России, VPN через неё ничего не изменит. Поэтому кода <code>RU</code> нет в каталоге, а сервер с этим кодом отбрасывается при загрузке списка.</p>
         </details>
 
         <details class="reveal">
@@ -551,7 +615,7 @@ freegate-servers/servers.json</code></pre>
   <div class="container footer__grid">
     <div>
       <a class="logo logo--footer" href="#top">
-        <span class="logo__mark">FG</span>
+        <img class="logo__mark" src="favicon.svg" alt="" width="38" height="38" decoding="async">
         <span class="logo__text">FreeGate<small>WireGuard VPN · Android</small></span>
       </a>
       <p class="muted footer__note">
