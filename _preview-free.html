@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<style>html, body { margin: 0; background: #060a12; } iframe { display: block; border: 0; }</style>
+</head>
+<body>
+<iframe id="f" src="index.html"></iframe>
+<script>
+  var q = new URLSearchParams(location.search);
+  var f = document.getElementById("f");
+  f.style.width = (parseInt(q.get("w") || "1440", 10)) + "px";
+  f.style.height = (parseInt(q.get("h") || "1700", 10)) + "px";
+  f.addEventListener("load", function () {
+    var d = f.contentDocument;
+    d.documentElement.style.scrollBehavior = "auto";
+    var st = d.createElement("style");
+    st.textContent = ".reveal{opacity:1 !important;transform:none !important}";
+    d.head.appendChild(st);
+    var t = d.getElementById(q.get("to") || "free");
+    if (t) d.documentElement.scrollTop = t.getBoundingClientRect().top + d.documentElement.scrollTop - 20 + parseInt(q.get("off") || "0", 10);
+  });
+</script>
+</body>
+</html>

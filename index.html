@@ -446,10 +446,10 @@ freegate-servers/servers.json</code></pre>
           <span class="badge badge--ok badge--lg">Бесплатно</span>
           <h3>Амстердам, Лос-Анджелес, Сингапур</h3>
           <p>
-            Три направления, которые реально поднять без платежей: на бесплатном тарифе облака
-            или на домашнем мини-ПК. Один сервер = один город, конфиги генерирует тот же скрипт.
-          </p>
-        </div>
+            Три направления из одного скрипта. Амстердам и Сингапур поднимаются на бесплатном
+            тарифе Oracle, Лос-Анджелес — на VPS от ~5 $/мес или на бесплатном Сан-Хосе
+            в Калифорнии. Один сервер = один город, конфиги генерирует тот же скрипт.
+          </p>        </div>
 
         <div class="free-cities__grid">
           <article class="fcity">
@@ -462,8 +462,8 @@ freegate-servers/servers.json</code></pre>
               <b>Амстердам</b>
               <span class="badge">NL</span>
             </div>
-            <code class="fcity__cmd">sudo env COUNT=10 COUNTRY=NL CITY=Amsterdam bash setup-wireguard.sh</code>
-            <p>Oracle Always Free · регион <code>eu-amsterdam-1</code> или любой VPS.</p>
+            <code class="fcity__cmd">sudo env COUNT=2 COUNTRY=NL CITY=Amsterdam bash setup-wireguard.sh</code>
+            <p>Oracle Always Free · регион <code>eu-amsterdam-1</code> — 0&nbsp;₽ навсегда.</p>
           </article>
 
           <article class="fcity">
@@ -482,8 +482,8 @@ freegate-servers/servers.json</code></pre>
               <b>Лос-Анджелес</b>
               <span class="badge">US</span>
             </div>
-            <code class="fcity__cmd">sudo env COUNT=10 COUNTRY=US CITY="Los Angeles" bash setup-wireguard.sh</code>
-            <p>Ближайший бесплатный регион — Калифорния (<code>us-west-1</code>, AWS Free Tier).</p>
+            <code class="fcity__cmd">sudo env COUNT=2 COUNTRY=US CITY="Los Angeles" bash setup-wireguard.sh</code>
+            <p>В Oracle региона LA нет: ближайший — <code>us-sanjose-1</code>, ~600 км, и только в отдельном аккаунте. Точка именно в LA — VPS от ~5&nbsp;$/мес.</p>
           </article>
 
           <article class="fcity">
@@ -497,16 +497,175 @@ freegate-servers/servers.json</code></pre>
               <b>Сингапур</b>
               <span class="badge">SG</span>
             </div>
-            <code class="fcity__cmd">sudo env COUNT=10 COUNTRY=SG CITY=Singapore bash setup-wireguard.sh</code>
-            <p>Oracle Always Free · регион <code>ap-singapore-1</code>.</p>
+            <code class="fcity__cmd">sudo env COUNT=2 COUNTRY=SG CITY=Singapore bash setup-wireguard.sh</code>
+            <p>Oracle Always Free · регион <code>ap-singapore-1</code> — 0&nbsp;₽, но нужен отдельный аккаунт.</p>
           </article>
         </div>
 
         <p class="free-cities__note">
-          Готовых публичных конфигов этих городов в APK нет и быть не может: бесплатный сервер —
-          это чья-то машина и канал. Зато на бесплатном тарифе вы получаете свою точку,
-          которая не логирует трафик и не делится с третьими лицами.
+          Три города — это три отдельных сервера: один адрес на все страны не работает.
+          Бесплатно все три поднимаются только на трёх аккаунтах Oracle (Амстердам, Сингапур,
+          Сан-Хосе) — второй и третий могут не одобрить. Рабочая альтернатива: Амстердам
+          на Oracle бесплатно, а Лос-Анджелес и Сингапур — VPS у Vultr или Linode, от ~5&nbsp;$/мес
+          за штуку. Готовых публичных конфигов этих городов в APK нет: бесплатный сервер —
+          это чья-то машина и канал.
         </p>
+
+        <!-- Пошаговый гайд: единственный честный бесплатный вариант -->
+        <div class="free-how">
+          <div class="free-how__head">
+            <span class="badge badge--ok">Always Free</span>
+            <h4>Свой сервер в Oracle Cloud: 20 минут и 0&nbsp;₽</h4>
+            <p>
+              Единственный бесплатный вариант, который не умирает через неделю и не делит
+              туннель с чужими людьми: 2 ядра, 12 ГБ памяти и 10 ТБ трафика в месяц — бессрочно.
+              Карта нужна только для верификации, на Always Free списаний нет.
+            </p>
+            <p class="free-how__tip">
+              Гайд ниже — для одного сервера (Амстердам). Для США и Сингапура повторите шаги
+              на новом сервере: для готового VPS шаги 1–2 пропускаются, дальше та же команда
+              со своим <code>COUNTRY</code> и <code>CITY</code>.
+            </p>
+          </div>
+
+          <ol class="steps free-how__steps">
+            <li class="step">
+              <span class="step__num">1</span>
+              <div>
+                <b>Регистрация и домашний регион</b>
+                <p>
+                  <code>cloud.oracle.com/free</code> → почта, телефон, карта. Сразу выберите
+                  Home Region: <code>Netherlands Northwest (Amsterdam)</code>,
+                  <code>Singapore</code> или <code>US West (San Jose)</code>.
+                  Поменять его потом нельзя, а бесплатные ресурсы дают только в нём.
+                </p>
+              </div>
+            </li>
+
+            <li class="step">
+              <span class="step__num">2</span>
+              <div>
+                <b>Создайте инстанс</b>
+                <p>
+                  Compute → Instances → Create. Образ Ubuntu 24.04, форма
+                  <code>VM.Standard.A1.Flex</code> на 2 OCPU / 12 ГБ (ARM, входит в бесплатные),
+                  публичный IPv4 включён, SSH-ключ скачайте. Если пишет
+                  «Out of host capacity» — попробуйте другой Availability Domain или форму
+                  <code>VM.Standard.E2.1.Micro</code>.
+                </p>
+              </div>
+            </li>
+
+            <li class="step">
+              <span class="step__num">3</span>
+              <div>
+                <b>Откройте UDP-порт 51820</b>
+                <p>
+                  Networking → Virtual Cloud Networks → ваша VCN → Security Lists → Default:
+                  Add Ingress Rule, Source <code>0.0.0.0/0</code>, IP Protocol <code>UDP</code>,
+                  Destination Port <code>51820</code>. Без этого рукопожатие не пройдёт.
+                </p>
+              </div>
+            </li>
+
+            <li class="step">
+              <span class="step__num">4</span>
+              <div>
+                <b>Запустите скрипт</b>
+                <p>Скопируйте <code>setup-wireguard.sh</code> из папки <code>server/</code> проекта на сервер и выполните команду своего города:</p>
+                <div class="code">
+                  <div class="code__head"><span>терминал</span><button class="copy" type="button">Копировать</button></div>
+                  <pre><code># на компьютере, из папки проекта
+scp setup-wireguard.sh ubuntu@&lt;IP&gt;:~
+ssh ubuntu@&lt;IP&gt;
+# уже на сервере
+sudo env COUNT=2 COUNTRY=NL CITY=Amsterdam bash setup-wireguard.sh</code></pre>
+                </div>
+                <p>Для Сингапура — <code>COUNTRY=SG CITY=Singapore</code>, для США — <code>COUNTRY=US CITY="Los Angeles"</code>.</p>
+                <p class="note">
+                  <code>COUNT=2</code> — два конфига, по одному на телефон: себе и маме.
+                  Один и тот же конфиг на двух устройствах не используйте — WireGuard
+                  путает сессии, и связь начинает отваливаться.
+                </p>
+              </div>
+            </li>
+
+            <li class="step">
+              <span class="step__num">5</span>
+              <div>
+                <b>Импортируйте конфиг</b>
+                <p>
+                  Скрипт создаст <code>freegate-servers/client-1.conf</code> и
+                  <code>client-2.conf</code> — по одному на телефон. Когда серверов три,
+                  переименуйте файлы по городу (<code>ams-1.conf</code>, <code>us-1.conf</code>,
+                  <code>sg-1.conf</code>), чтобы не путаться, и импортируйте все три:
+                  «+ Добавить WireGuard-конфиг» → «Файл .conf». Название и страна подтянутся
+                  из конфига, переключение — на лету.
+                </p>
+              </div>
+            </li>
+          </ol>
+
+          <p class="note note--warn">
+            На образах Ubuntu в OCI порт режет ещё и локальный <code>iptables</code>.
+            Если туннель поднимается, но интернета нет:
+            <code>sudo iptables -I INPUT -p udp --dport 51820 -j ACCEPT</code>, затем
+            <code>sudo apt-get install -y iptables-persistent</code> и
+            <code>sudo netfilter-persistent save</code>.
+          </p>
+        </div>
+
+        <!-- Честная таблица: почему чужие «бесплатные» конфиги не годятся -->
+        <div class="flimits">
+          <h4>Что ещё «бесплатно» и почему не подходит</h4>
+          <div class="flimits__scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Сервис</th>
+                  <th>Условия бесплатного тарифа</th>
+                  <th>Импорт в FreeGate</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Windscribe Free</td>
+                  <td>10 ГБ в месяц, 10 стран, включая Нидерланды и США</td>
+                  <td class="no">Нет: генератор WireGuard-конфигов только на Pro</td>
+                </tr>
+                <tr>
+                  <td>Proton VPN Free</td>
+                  <td>Без лимита трафика, 5 стран</td>
+                  <td class="no">Нет: файл конфигурации доступен на платном плане</td>
+                </tr>
+                <tr>
+                  <td>hide.me Free</td>
+                  <td>7 локаций, скорость около 1 Мбит/с</td>
+                  <td class="no">Нет: WireGuard только в их приложении</td>
+                </tr>
+                <tr>
+                  <td>Cloudflare WARP</td>
+                  <td>Бесплатно и без лимита трафика</td>
+                  <td class="no">Страну выбрать нельзя, а в этой сети серверы WARP недоступны</td>
+                </tr>
+                <tr>
+                  <td>Публичные «free config» сайты</td>
+                  <td>Конфиг на 7 дней, ключи общие на сотни людей</td>
+                  <td class="no">Технически да, но через неделю сервер умирает</td>
+                </tr>
+                <tr>
+                  <td>Oracle Always Free</td>
+                  <td>2 OCPU, 12 ГБ RAM, 10 ТБ/мес, бессрочно</td>
+                  <td class="yes">Да: это ваш сервер, ключи только у вас</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="note">
+            Проверено 16.11.2026. Условия бесплатных тарифов меняются — перед регистрацией
+            сверьтесь с сайтом провайдера.
+          </p>
+        </div>
       </div>
 
       <div class="json reveal">
@@ -567,7 +726,7 @@ freegate-servers/servers.json</code></pre>
 
         <details class="reveal">
           <summary>Почему внутри нет бесплатных серверов всех стран?</summary>
-          <p>Сервер — это железо, канал и электричество. «Бесплатные VPN всех стран» живут за счёт продажи трафика, рекламы или кражи чужих мощностей. Здесь вместо этого скрипт, который поднимает ваш собственный сервер за пару минут.</p>
+          <p>Сервер — это железо, канал и электричество. «Бесплатные VPN всех стран» живут за счёт продажи трафика, рекламы или кражи чужих мощностей. Здесь вместо этого скрипт, который поднимает ваш собственный сервер за пару минут. Бесплатный вариант с инструкцией — в разделе <a href="#free">«Амстердам, Лос-Анджелес, Сингапур»</a>.</p>
         </details>
 
         <details class="reveal">

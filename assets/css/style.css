@@ -1538,6 +1538,114 @@ pre code {
   color: var(--muted-2);
 }
 
+/* гайд по бесплатному серверу внутри блока направлений */
+.free-how {
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.free-how__head {
+  max-width: 660px;
+  margin-bottom: 14px;
+}
+
+.free-how__head h4 {
+  margin: 8px 0 6px;
+  font-size: 1rem;
+}
+
+.free-how__head p {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.free-how__head .free-how__tip {
+  margin-top: 10px;
+  padding-left: 12px;
+  border-left: 2px solid rgba(74, 222, 128, 0.55);
+  color: var(--text);
+}
+
+.free-how__steps .step {
+  background: rgba(6, 10, 18, 0.5);
+}
+
+.free-how__steps .step > div {
+  min-width: 0;
+}
+
+/* таблица ограничений бесплатных тарифов */
+.flimits {
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.flimits h4 {
+  margin: 0 0 10px;
+  font-size: 1rem;
+}
+
+.flimits__scroll {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: rgba(6, 10, 18, 0.5);
+  -webkit-overflow-scrolling: touch;
+}
+
+.flimits table {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.flimits th,
+.flimits td {
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--line);
+}
+
+.flimits thead th {
+  background: rgba(148, 163, 184, 0.05);
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+  white-space: nowrap;
+}
+
+.flimits tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.flimits tbody td:first-child {
+  color: var(--text);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.flimits td {
+  color: var(--muted);
+}
+
+.flimits .yes {
+  color: var(--green);
+}
+
+.flimits .no {
+  color: var(--muted-2);
+}
+
 /* блоки кода */
 .code {
   min-width: 0;
@@ -2130,6 +2238,63 @@ pre code {
 
   .hash code {
     flex: none;
+  }
+
+  /* Длинные команды в гайде на телефоне переносим, а не режем */
+  .free-how__steps .code pre {
+    font-size: 0.72rem;
+  }
+
+  .free-how__steps .code pre code {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  .flimits__scroll {
+    overflow: visible;
+  }
+
+  .flimits table,
+  .flimits tbody,
+  .flimits tr,
+  .flimits td {
+    display: block;
+    min-width: 0;
+  }
+
+  .flimits thead {
+    display: none;
+  }
+
+  .flimits tr {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .flimits tr:last-child {
+    border-bottom: 0;
+  }
+
+  .flimits th,
+  .flimits td {
+    padding: 0;
+    border: 0;
+  }
+
+  .flimits tbody td:first-child {
+    margin-bottom: 3px;
+    font-size: 0.84rem;
+    white-space: normal;
+  }
+
+  .flimits td:nth-child(3) {
+    margin-top: 6px;
+  }
+
+  .flimits td:nth-child(3)::before {
+    content: "Импорт: ";
+    color: var(--muted-2);
+    font-weight: 600;
   }
 }
 
