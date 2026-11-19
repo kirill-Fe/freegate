@@ -15,7 +15,7 @@ docs/
 │   ├── css/style.css
 │   └── js/main.js
 ├── download/
-│   └── freegate-1.0.0.apk     сборка приложения
+│   └── freegate-1.1.0.apk     сборка приложения
 ├── screenshot.png             скриншоты приложения
 ├── countries.png
 ├── import.png
@@ -74,7 +74,7 @@ cd docs && python3 -m http.server 8080
 1. Собрать APK: `./gradlew assembleDebug`.
 2. Положить его в `docs/download/` (имя с версией, например `freegate-1.1.0.apk`).
 3. В `docs/index.html` заменить:
-   - ссылки `download/freegate-1.0.0.apk` на новый файл;
+   - ссылки `download/freegate-*.apk` на новый файл;
    - размер, дату сборки и SHA-256 в блоке «Скачать»;
    - номер версии в заголовке и в CTA.
 4. Обновить скриншоты в `docs/`, если менялся интерфейс.
@@ -92,7 +92,7 @@ sha256sum docs/download/freegate-1.1.0.apk
 
 ## Проверка перед публикацией
 
-- [ ] Все ссылки открываются (в том числе `download/freegate-1.0.0.apk`).
+- [ ] Все ссылки открываются (в том числе `download/freegate-1.1.0.apk`).
 - [ ] На телефоне работает меню-бургер и демо-кнопка.
 - [ ] Скриншоты открываются в лайтбоксе.
 - [ ] Кнопки «Копировать» копируют код и SHA-256.

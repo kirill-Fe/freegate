@@ -34,7 +34,7 @@
       <a href="#faq">FAQ</a>
     </nav>
 
-    <a class="btn btn--primary btn--sm header__cta" href="download/freegate-1.0.0.apk" download>Скачать APK</a>
+    <a class="btn btn--primary btn--sm header__cta" href="download/freegate-1.1.0.apk" download>Скачать APK</a>
     <button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav">
       <span></span><span></span><span></span>
     </button>
@@ -55,7 +55,7 @@
           Настоящий WireGuard-туннель — без аккаунтов, рекламы и логов.
         </p>
         <div class="hero__actions">
-          <a class="btn btn--primary" href="download/freegate-1.0.0.apk" download>
+          <a class="btn btn--primary" href="download/freegate-1.1.0.apk" download>
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0 4.5-4.5M12 15l-4.5-4.5M4 20h16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
             Скачать для Android
           </a>
@@ -258,9 +258,9 @@
 
         <div class="pc__roadmap">
           <div class="road">
-            <div class="road__top"><b>Android</b><span class="badge badge--ok">Готово · 1.0.0</span></div>
+            <div class="road__top"><b>Android</b><span class="badge badge--ok">Готово · 1.1.0</span></div>
             <div class="progress"><span style="--v:100%"></span></div>
-            <p class="road__note">Туннель, таймер, выбор стран, импорт и синхронизация.</p>
+            <p class="road__note">Туннель, таймер, выбор стран, импорт, синхронизация, диагностика связи.</p>
           </div>
 
           <div class="road">
@@ -290,7 +290,7 @@
     <div class="container">
       <div class="section__head reveal">
         <span class="kicker">Скачать</span>
-        <h2>FreeGate 1.0.0 для Android</h2>
+        <h2>FreeGate 1.1.0 для Android</h2>
         <p class="section__sub">APK-файл без Play Store: ставится напрямую, весит 19,2 МБ.</p>
       </div>
 
@@ -299,26 +299,32 @@
           <div class="download__head">
             <img class="download__logo" src="favicon.svg" alt="" width="62" height="62" decoding="async">
             <div>
-              <h3>FreeGate <span class="muted">1.0.0</span></h3>
+              <h3>FreeGate <span class="muted">1.1.0</span></h3>
               <p class="muted">Android 7.0+ (API 24) · arm64 / x86_64 · WireGuard</p>
             </div>
           </div>
 
           <dl class="meta">
             <div><dt>Размер</dt><dd>19,2 МБ</dd></div>
-            <div><dt>Дата сборки</dt><dd>15.11.2026</dd></div>
+            <div><dt>Дата сборки</dt><dd>19.11.2026</dd></div>
             <div><dt>Протокол</dt><dd>WireGuard</dd></div>
             <div><dt>Цена</dt><dd>0 ₽</dd></div>
           </dl>
 
           <div class="hash">
             <span>SHA-256</span>
-            <code id="sha256">84a9b05ada64454a19e6ae0e286563db979f7effbee82734955f7f45f6fc6428</code>
+            <code id="sha256">c0be40c2f4fb2dbe3cd6c38919412daf52590e073192c1c630810a9b65044f5b</code>
             <button class="copy copy--mini" type="button" data-copy-target="sha256" aria-label="Скопировать SHA-256">Копировать</button>
           </div>
 
+          <p class="note">
+            <b>Что нового в 1.1.0:</b> диагностика связи (видно, когда сервер отвечал последний раз),
+            автопереподключение при смене Wi-Fi и мобильного интернета, понятная ошибка с кнопкой
+            «Повторить» и подтверждение удаления сервера.
+          </p>
+
           <div class="download__actions">
-            <a class="btn btn--primary btn--wide" href="download/freegate-1.0.0.apk" download>
+            <a class="btn btn--primary btn--wide" href="download/freegate-1.1.0.apk" download>
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0 4.5-4.5M12 15l-4.5-4.5M4 20h16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
               Скачать APK
             </a>
@@ -335,7 +341,7 @@
         <ol class="steps reveal">
           <li class="step">
             <span class="step__num">1</span>
-            <div><b>Скачайте файл</b><p><code>freegate-1.0.0.apk</code> сохранится в «Загрузки».</p></div>
+            <div><b>Скачайте файл</b><p><code>freegate-1.1.0.apk</code> сохранится в «Загрузки».</p></div>
           </li>
           <li class="step">
             <span class="step__num">2</span>
@@ -429,12 +435,16 @@ freegate-servers/servers.json</code></pre>
               </div>
             </div>
             <div class="code">
-              <div class="code__head"><span>отдать список по HTTP</span><button class="copy" type="button">Копировать</button></div>
-              <pre><code>cd freegate-servers &amp;&amp; python3 -m http.server 8080</code></pre>
+              <div class="code__head"><span>отдать список по HTTPS</span><button class="copy" type="button">Копировать</button></div>
+              <pre><code># Caddy сам получит сертификат и закроет список паролем
+caddy reverse-proxy --from vpn.example.com --to 127.0.0.1:8080</code></pre>
             </div>
             <p class="note">
-              Файл <code>servers.json</code> содержит приватные ключи. Для публичного хостинга
-              используйте HTTPS и токен в URL, иначе сервером сможет пользоваться кто угодно.
+              <b>servers.json содержит приватные ключи</b> — это секрет, а не просто список адресов.
+              Не выкладывайте его в публичный GitHub Pages, в открытый HTTP и не раздавайте
+              ссылкой без защиты: любой, кто получит файл, подключится к вашему серверу.
+              Используйте HTTPS + Basic Auth или приватную ссылку с токеном (поле «Токен» в настройках
+              приложения) и меняйте токен, если он мог утечь.
             </p>
           </div>
         </article>
@@ -764,7 +774,7 @@ sudo env COUNT=2 COUNTRY=NL CITY=Amsterdam bash setup-wireguard.sh</code></pre>
         <h2>Готовы попробовать?</h2>
         <p>Скачайте APK, добавьте свой сервер и нажмите большую кнопку.</p>
       </div>
-      <a class="btn btn--primary btn--lg" href="download/freegate-1.0.0.apk" download>Скачать FreeGate 1.0.0</a>
+      <a class="btn btn--primary btn--lg" href="download/freegate-1.1.0.apk" download>Скачать FreeGate 1.1.0</a>
     </div>
   </section>
 
